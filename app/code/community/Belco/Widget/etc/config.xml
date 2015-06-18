@@ -65,25 +65,26 @@
       </admin_system_config_changed_section_settings>
     </events>
   </global>
-  <admin>
-    <routers>
-      <sync>
-        <use>admin</use>
-        <args>
-          <module>Belco_Widget</module>
-          <frontName>belco</frontName>
-        </args>
-      </sync>
-    </routers>
-  </admin>
   <adminhtml>
-    <layout>
-      <updates>
-        <belco>
-          <file>belco.xml</file>
-        </belco>
-      </updates>
-    </layout>
+    <acl>
+      <resources>
+        <admin>
+          <children>
+            <system>
+              <children>
+                <config>
+                  <children>                    
+                    <settings translate="title" module="belco">
+                      <title>Settings</title>
+                    </settings>
+                  </children>
+                </config>
+              </children>
+            </system>
+          </children>
+        </admin>
+      </resources>
+    </acl>
   </adminhtml>
   <frontend>
     <layout>
@@ -99,7 +100,7 @@
       <general>
         <shop_id/>
         <api_secret/>
-        <api_url>http://localhost:3100/</api_url>
+        <api_url>https://api.belco.io/</api_url>
       </general>
     </settings>
   </default>

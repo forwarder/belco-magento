@@ -1,51 +1,51 @@
 <?xml version="1.0"?>
 <config>
-    <tabs>
-        <belco translate="label" module="widget">
-            <label>Belco.io</label>
-            <sort_order>150</sort_order>
-        </belco>
-    </tabs>
-    <sections>
-        <settings translate="label" module="widget">
-            <label>Settings</label>
-            <tab>belco</tab>
-            <frontend_type>text</frontend_type>
-            <sort_order>10</sort_order>
-            <show_in_default>1</show_in_default>
-            <show_in_website>1</show_in_website>
-            <show_in_store>1</show_in_store>
-            <groups>
-                <general translate="label">
-                    <label>API Settings</label>
-                    <frontend_type>text</frontend_type>
-                    <sort_order>0</sort_order>
-                    <show_in_default>1</show_in_default>
-                    <show_in_website>1</show_in_website>
-                    <show_in_store>1</show_in_store>
-                    <expanded>1</expanded>
-                    <fields>
-                        <shop_id translate="label">
-                            <label>Shop id</label>
-                            <frontend_type>text</frontend_type>
-                            <sort_order>100</sort_order>
-                            <show_in_default>1</show_in_default>
-                            <show_in_website>1</show_in_website>
-                            <show_in_store>1</show_in_store>
-                            <comment>Your Belco.io shop id</comment>
-                        </shop_id>
-                        <api_secret translate="label">
-                            <label>API Secret</label>
-                            <frontend_type>text</frontend_type>
-                            <sort_order>200</sort_order>
-                            <show_in_default>1</show_in_default>
-                            <show_in_website>1</show_in_website>
-                            <show_in_store>1</show_in_store>
-                            <comment>Your Belco.io api secret</comment>
-                        </api_secret>
-                    </fields>
-                </general>
-            </groups>
-        </settings>
-    </sections>
+  <tabs>
+    <belco translate="label" module="belco">
+      <label>Belco.io</label>
+      <sort_order>150</sort_order>
+    </belco>
+  </tabs>
+  <sections>
+    <settings translate="label" module="belco">
+      <label>Settings</label>
+      <tab>belco</tab>
+      <frontend_type>text</frontend_type>
+      <sort_order>10</sort_order>
+      <show_in_default>1</show_in_default>
+      <show_in_website>1</show_in_website>
+      <show_in_store>1</show_in_store>
+      <groups>
+        <general translate="label">
+          <label>API Settings</label>
+          <frontend_type>text</frontend_type>
+          <sort_order>0</sort_order>
+          <show_in_default>1</show_in_default>
+          <show_in_website>1</show_in_website>
+          <show_in_store>1</show_in_store>
+          <expanded>1</expanded>
+          <fields>
+            <shop_id translate="label">
+              <label>Shop id</label>
+              <frontend_type>text</frontend_type>
+              <sort_order>100</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+              <comment>Your Belco.io shop id</comment>
+            </shop_id>
+            <api_secret translate="label">
+              <label>API Secret</label>
+              <frontend_type>text</frontend_type>
+              <sort_order>200</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+              <comment>Your Belco.io api secret</comment>
+            </api_secret>
+          </fields>
+        </general>
+      </groups>
+    </settings>
+  </sections>
 </config>

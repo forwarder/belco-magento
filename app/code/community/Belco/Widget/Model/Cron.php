@@ -33,12 +33,13 @@ class Belco_Widget_Model_Cron
 
         foreach ($_jobsCollection as $_job) {
             $result = false;
+            $data = json_decode((string)$_job->getData('data'), true);
 
             switch ($_job->getData('type')) {
                 case 'customer':
-                    $result = $this->_syncCustomer($_job->getData('data')); break;
+                    $result = $this->_syncCustomer($data); break;
                 case 'order':
-                    $result = $this->_syncOrder($_job->getData('data')); break;
+                    $result = $this->_syncOrder($data); break;
             }
 
             if ($result === true) {
@@ -71,7 +72,7 @@ class Belco_Widget_Model_Cron
     {
         $order = Mage::getModel('sales/order')->load($data['order_id']);
         try{
-            //$this->api->syncOrder($order);
+            $this->api->syncOrder($order);
         }
         catch(Exception $e){
             $this->helper->log("Exception: ". $e->getMessage());

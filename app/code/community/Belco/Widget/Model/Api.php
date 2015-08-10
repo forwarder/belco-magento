@@ -102,7 +102,7 @@ class Belco_Widget_Model_Api
     $config = Mage::getStoreConfig('settings/general');
     $errorCodes = array(500, 400, 401);
     $data = json_encode($data);
-    
+
     if (empty($config['api_secret'])) {
       throw new Exception(
         'Missing API configuration, go to System -> Configuration -> Belco.io -> Settings and fill in your API credentials'
@@ -119,27 +119,29 @@ class Belco_Widget_Model_Api
     curl_setopt($ch, CURLOPT_HTTPHEADER, array(
       'Content-Type: application/json',
       'Content-Length: ' . strlen($data),
-      'X-Api-Key: ' . $config['api_secret'] 
+      'X-Api-Key: ' . $config['api_secret']
     ));
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $data); 
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
-    if (curl_exec($ch) === false) {
+    $response = curl_exec($ch);
+
+    if ($response === false) {
       curl_close($ch);
       throw new Exception("Error: 'Request to Belco failed'");
     }
+
+    $response = json_decode($response);
 
     $responseInfo = curl_getinfo($ch);
 
     curl_close($ch);
 
     if (in_array($responseInfo['http_code'], $errorCodes)) {
-      throw new Exception("Error: 'Belco returned status code " . $responseInfo['http_code'] . "'");
+      throw new Exception("Error: '" . $response->message . "'");
     }
 
-    $this->logger->log("Belco returned status: " . $responseInfo['http_code']);
-
-    return $responseInfo;
+    return $response;
   }
 
-} 
+}

@@ -19,9 +19,25 @@
     <models>
       <belco>
         <class>Belco_Widget_Model</class>
-        <resourceModel>widget_mysql4</resourceModel>
+        <resourceModel>belco_resource</resourceModel>
       </belco>
+      <belco_resource>
+        <class>Belco_Widget_Model_Resource</class>
+        <entities>
+          <queue>
+            <table>belco_widget_queue</table>
+          </queue>
+        </entities>
+      </belco_resource>
     </models>
+    <resources>
+      <belco_widget_setup>
+        <setup>
+          <module>Belco_Widget</module>
+          <class>Mage_Core_Model_Resource_Setup</class>
+        </setup>
+      </belco_widget_setup>
+    </resources>
     <events>
       <customer_save_after>
         <observers>

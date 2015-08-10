@@ -123,7 +123,11 @@ class Belco_Widget_Model_Api
     ));
     curl_setopt($ch, CURLOPT_POSTFIELDS, $data); 
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
+    
+    // Dont check ssl cert
+    // Todo: add cert with CURLOPT_CAINFO
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    
     if (curl_exec($ch) === false) {
       curl_close($ch);
       throw new Exception("Error: 'Request to Belco failed'");

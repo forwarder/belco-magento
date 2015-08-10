@@ -81,6 +81,14 @@
       </admin_system_config_changed_section_belco_settings>
     </events>
   </global>
+  <crontab>
+    <jobs>
+      <belco_widget_queue_cron>
+        <schedule><cron_expr>*/5 * * * *</cron_expr></schedule>
+        <run><model>Belco_Widget_Model_Cron::processQueue</model></run>
+      </belco_widget_queue_cron>
+    </jobs>
+  </crontab>
   <adminhtml>
     <acl>
       <resources>

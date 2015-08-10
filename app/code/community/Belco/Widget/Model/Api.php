@@ -33,7 +33,7 @@ class Belco_Widget_Model_Api
   }
 
   public function connect() {
-    $config = Mage::getStoreConfig('settings/general');
+    $config = Mage::getStoreConfig('belco_settings/general');
     $data = array(
       'id' => $config['shop_id'],
       'type' => 'magento',
@@ -99,7 +99,7 @@ class Belco_Widget_Model_Api
    */
   private function post($path, $data)
   {
-    $config = Mage::getStoreConfig('settings/general');
+    $config = Mage::getStoreConfig('belco_settings/general');
     $errorCodes = array(500, 400, 401);
     $data = json_encode($data);
     

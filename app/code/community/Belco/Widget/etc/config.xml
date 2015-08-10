@@ -53,7 +53,7 @@
           </sales_order_save_after_handler>
         </observers>
       </sales_order_save_after>
-      <admin_system_config_changed_section_settings>
+      <admin_system_config_changed_section_belco_settings>
         <observers>
           <widget>
             <type>singleton</type>
@@ -62,7 +62,7 @@
             <args/>
           </widget>
         </observers>
-      </admin_system_config_changed_section_settings>
+      </admin_system_config_changed_section_belco_settings>
     </events>
   </global>
   <adminhtml>
@@ -74,9 +74,9 @@
               <children>
                 <config>
                   <children>                    
-                    <settings translate="title" module="belco">
+                    <belco_settings translate="title" module="belco">
                       <title>Settings</title>
-                    </settings>
+                    </belco_settings>
                   </children>
                 </config>
               </children>
@@ -96,12 +96,12 @@
     </layout>
   </frontend>
   <default>
-    <settings>
+    <belco_settings>
       <general>
         <shop_id/>
         <api_secret/>
         <api_url>https://api.belco.io/</api_url>
       </general>
-    </settings>
+    </belco_settings>
   </default>
 </config>

@@ -58,8 +58,7 @@ class Belco_Widget_Model_Cron
     {
         $customer = Mage::getModel('customer/customer')->load($data['customer_id']);
         try {
-            //$this->api->syncCustomer($customer);
-            Mage::log(var_export($data, true), null, 'belcodebug.log', true);
+            $this->api->syncCustomer($customer);
         } catch (Exception $e) {
             $this->helper->log("Exception: " . $e->getMessage());
             return $e;
@@ -73,7 +72,6 @@ class Belco_Widget_Model_Cron
         $order = Mage::getModel('sales/order')->load($data['order_id']);
         try{
             //$this->api->syncOrder($order);
-            Mage::log(var_export($data, true), null, 'belcodebug.log', true);
         }
         catch(Exception $e){
             $this->helper->log("Exception: ". $e->getMessage());

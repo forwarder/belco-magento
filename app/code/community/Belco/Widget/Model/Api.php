@@ -102,7 +102,7 @@ class Belco_Widget_Model_Api
     $config = Mage::getStoreConfig('belco_settings/general');
     $errorCodes = array(500, 400, 401);
     $data = json_encode($data);
-    print_r($data);die;
+
     if (empty($config['api_secret'])) {
       throw new Exception(
         'Missing API configuration, go to System -> Configuration -> Belco.io -> Settings and fill in your API credentials'

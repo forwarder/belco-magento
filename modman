@@ -1,0 +1,4 @@
+app/code/community/Belco/Widget                     app/code/community/Belco/Widget
+design/frontend/base/default/layout/belco.xml       app/design/frontend/base/default/layout/belco.xml
+design/frontend/base/default/template/belco         app/design/frontend/base/default/template/belco
+app/etc/modules/Belco_Widget.xml                    app/etc/modules/Belco_Widget.xml

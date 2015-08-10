@@ -7,7 +7,7 @@
     </belco>
   </tabs>
   <sections>
-    <settings translate="label" module="belco">
+    <belco_settings translate="label" module="belco">
       <label>Settings</label>
       <tab>belco</tab>
       <frontend_type>text</frontend_type>
@@ -46,6 +46,6 @@
           </fields>
         </general>
       </groups>
-    </settings>
+    </belco_settings>
   </sections>
 </config>

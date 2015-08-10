@@ -127,8 +127,9 @@ class Belco_Widget_Model_Api
     $response = curl_exec($ch);
 
     if ($response === false) {
+      $error = curl_error($ch);
       curl_close($ch);
-      throw new Exception("Error: 'Request to Belco failed'");
+      throw new Exception("Error: 'Request to Belco failed' - " . $error);
     }
 
     $response = json_decode($response);

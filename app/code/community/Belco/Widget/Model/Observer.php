@@ -103,7 +103,7 @@ public function systemConfigChangedHook(Varien_Event_Observer $observer)
   {
     if ($customer) {
       $this->helper->log("user with id: " . $customer->getId() . " chanced");
-      Mage::getModel('widget/queue')->addJob(array(
+      Mage::getModel('belco/queue')->addJob(array(
         'type' => 'customer',
         'data' => array(
           'customer_id' => $customer->getId()

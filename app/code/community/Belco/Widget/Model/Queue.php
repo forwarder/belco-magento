@@ -19,15 +19,15 @@ class Belco_Widget_Model_Queue extends Mage_Core_Model_Abstract
 
     public function addJob($params)
     {
-        $this->addData('type', empty($params['type']) ? 'unknown' : $params['type']);
-        $this->addData('data', json_encode((array)$params['type']));
-        $this->addData('created_at', time());
+        $this->setData('type', empty($params['type']) ? 'unknown' : $params['type']);
+        $this->setData('data', json_encode((array)$params['data']));
+        $this->setData('created_at', time());
 
         try {
             $this->save();
             return true;
         } catch(Exception $e) {
-            $this->helper->log("Queue exception: " . $e->getMessage());
+            $this->logger->log("Queue exception: " . $e->getMessage());
             return false;
         }
     }

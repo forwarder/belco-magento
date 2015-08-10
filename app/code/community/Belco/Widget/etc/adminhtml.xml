@@ -9,7 +9,7 @@
                             <config>
                                 <children>
                                     <belco_settings translate="title" module="belco">
-                                        <title>Settings</title>
+                                        <title>Belco Settings</title>
                                     </belco_settings>
                                 </children>
                             </config>

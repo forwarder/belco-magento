@@ -103,12 +103,12 @@ public function systemConfigChangedHook(Varien_Event_Observer $observer)
   {
     if ($customer) {
       $this->helper->log("user with id: " . $customer->getId() . " chanced");
-      try {
-        $this->api->syncCustomer($customer);
-      } catch (Exception $e) {
-        $this->helper->log("Exception: " . $e->getMessage());
-        $this->helper->warnAdmin($e->getMessage());
-      }
+      Mage::getModel('widget/queue')->addJob(array(
+        'type' => 'customer',
+        'data' => array(
+          'customer_id' => $customer->getId()
+        )
+      ));
     }
   }
 

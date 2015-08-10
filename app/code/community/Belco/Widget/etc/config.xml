@@ -89,27 +89,6 @@
       </belco_widget_queue_cron>
     </jobs>
   </crontab>
-  <adminhtml>
-    <acl>
-      <resources>
-        <admin>
-          <children>
-            <system>
-              <children>
-                <config>
-                  <children>                    
-                    <belco_settings translate="title" module="belco">
-                      <title>Settings</title>
-                    </belco_settings>
-                  </children>
-                </config>
-              </children>
-            </system>
-          </children>
-        </admin>
-      </resources>
-    </acl>
-  </adminhtml>
   <frontend>
     <layout>
       <updates>

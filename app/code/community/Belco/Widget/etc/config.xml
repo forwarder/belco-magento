@@ -19,9 +19,25 @@
     <models>
       <belco>
         <class>Belco_Widget_Model</class>
-        <resourceModel>widget_mysql4</resourceModel>
+        <resourceModel>belco_resource</resourceModel>
       </belco>
+      <belco_resource>
+        <class>Belco_Widget_Model_Resource</class>
+        <entities>
+          <queue>
+            <table>belco_widget_queue</table>
+          </queue>
+        </entities>
+      </belco_resource>
     </models>
+    <resources>
+      <belco_widget_setup>
+        <setup>
+          <module>Belco_Widget</module>
+          <class>Mage_Core_Model_Resource_Setup</class>
+        </setup>
+      </belco_widget_setup>
+    </resources>
     <events>
       <customer_save_after>
         <observers>
@@ -65,27 +81,14 @@
       </admin_system_config_changed_section_belco_settings>
     </events>
   </global>
-  <adminhtml>
-    <acl>
-      <resources>
-        <admin>
-          <children>
-            <system>
-              <children>
-                <config>
-                  <children>                    
-                    <belco_settings translate="title" module="belco">
-                      <title>Settings</title>
-                    </belco_settings>
-                  </children>
-                </config>
-              </children>
-            </system>
-          </children>
-        </admin>
-      </resources>
-    </acl>
-  </adminhtml>
+  <crontab>
+    <jobs>
+      <belco_widget_queue_cron>
+        <schedule><cron_expr>*/5 * * * *</cron_expr></schedule>
+        <run><model>belco/cron::processQueue</model></run>
+      </belco_widget_queue_cron>
+    </jobs>
+  </crontab>
   <frontend>
     <layout>
       <updates>

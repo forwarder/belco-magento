@@ -48,13 +48,13 @@ class Belco_Widget_Model_Observer
     $order = $observer->getEvent()->getOrder();
     if($order){
       $this->helper->log("New order placed with id: " . $order->getId());
-      try{
-        $this->api->syncOrder($order);
-      }
-      catch(Exception $e){
-        $this->helper->log("Exception: ". $e->getMessage());
-        $this->helper->warnAdmin($e->getMessage());
-      }
+
+      Mage::getModel('belco/queue')->addJob(array(
+          'type' => 'order',
+          'data' => array(
+              'order_id' => $order->getId()
+          )
+      ));
     }
   }
 
@@ -73,15 +73,21 @@ class Belco_Widget_Model_Observer
     if(is_string($status)){ //only fire when we actually have an status
       $string = "The status of order #" . $order->getIncrementId() . " chanced to: " . $order->getStatus();
       $this->helper->log($string);
-      try{
-        $this->api->syncOrder($order);
-        $this->helper->log("Order has changed, sending updated customer info to Belco");
-        $customer = Mage::getModel('customer/customer')->load($order->getCustomerId());
-        $this->_customerHook($customer);
-      }
-      catch(Exception $e){
-        $this->helper->log("Exception: ". $e->getMessage());
-        $this->helper->warnAdmin($e->getMessage());
+
+      Mage::getModel('belco/queue')->addJob(array(
+          'type' => 'order',
+          'data' => array(
+              'order_id' => $order->getId()
+          )
+      ));
+
+      if ($order->getCustomerId()) {
+        Mage::getModel('belco/queue')->addJob(array(
+            'type' => 'customer',
+            'data' => array(
+                'customer_id' => $order->getCustomerId()
+            )
+        ));
       }
     }
   }
@@ -103,12 +109,12 @@ public function systemConfigChangedHook(Varien_Event_Observer $observer)
   {
     if ($customer) {
       $this->helper->log("user with id: " . $customer->getId() . " chanced");
-      try {
-        $this->api->syncCustomer($customer);
-      } catch (Exception $e) {
-        $this->helper->log("Exception: " . $e->getMessage());
-        $this->helper->warnAdmin($e->getMessage());
-      }
+      Mage::getModel('belco/queue')->addJob(array(
+        'type' => 'customer',
+        'data' => array(
+          'customer_id' => $customer->getId()
+        )
+      ));
     }
   }
 

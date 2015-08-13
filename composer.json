@@ -15,9 +15,9 @@
     ], 
     "extra": {
         "map": [
-            ["app/code/community/Belco", "app/code/community/Belco"],
+            ["app/code/community/Belco/Widget", "app/code/community/Belco/Widget"],
             ["app/etc/modules/Belco_Widget.xml", "app/etc/modules/Belco_Widget.xml"],
-            ["design/frontend/base/default/layout", "app/design/frontend/base/default/layout/belco.xml"],
+            ["design/frontend/base/default/layout/belco.xml", "app/design/frontend/base/default/layout/belco.xml"],
             ["design/frontend/base/default/template/belco", "app/design/frontend/base/default/template/belco"]
         ]
     }

@@ -3,7 +3,7 @@
     "license": "GPL-3.0",
     "type": "magento-module",
     "version": "0.0.1",
-    "description":"Belco.io Magento Module to export orders & customer information to the Belco app",
+    "description":"Belco.io Magento Module to install widget code and sync customer information.",
     "require": {
     },
     "authors":[
@@ -12,7 +12,7 @@
             "email":"eelco@belco.io",
             "homepage": "http://belco.io"
         }
-    ], 
+    ],
     "extra": {
         "map": [
             ["app/code/community/Belco/Widget", "app/code/community/Belco/Widget"],

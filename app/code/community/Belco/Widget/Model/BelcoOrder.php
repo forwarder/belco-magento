@@ -13,11 +13,6 @@ class Belco_Widget_Model_BelcoOrder
   private $order;
 
   /**
-   * @var Mage_Sales_Model_Resource_Order_Shipment_Collection
-   */
-  private $shipments;
-
-  /**
    * @var Belco_Widget_Helper_Data
    */
   private $helper;
@@ -33,7 +28,7 @@ class Belco_Widget_Model_BelcoOrder
   {
     $this->helper = Mage::helper('widget');
     $this->order = $order;
-    $this->customer = Mage::getModel('customer/customer')->load($order->getCustomerId());
+
     $this->shipments = $this->order->getShipmentsCollection();
     return $this->make();
   }
@@ -77,16 +72,26 @@ class Belco_Widget_Model_BelcoOrder
     );
   }
 
-private function getCustomer() {
-  $address = $this->order->getBillingAddress();
-  $customer = array(
-    'id' => $this->order->getCustomerId(),
-    'name' => $this->order->getCustomerName(),
-    'email' => $this->order->getCustomerEmail(),
-    'phoneNumber' => $address->getTelephone()
-  );
-  return $customer;
-}
+  /**
+   * Gets the customer info for a order, contains the required parts
+   * for the Belco API.
+   * @return array
+   */
+  private function getCustomer() {
+    $address = $this->order->getBillingAddress();
+    $customer = array(
+      'id' => $this->order->getCustomerId(),
+      'name' => $this->order->getCustomerName(),
+      'email' => $this->order->getCustomerEmail(),
+      'phoneNumber' => $address->getTelephone(),
+      'city' => $address->getCity(),
+      'country' => $address->getCountry(),
+      'lastOrder' => strtotime($this->order->getCreatedAt()),
+      'lastVisit' => time(),
+      'ipAddress' => $this->order->getRemoteIp()
+    );
+    return $customer;
+  }
 
   /**
    * Gets the Details view as first item of the 'details_view' key
@@ -192,7 +197,7 @@ private function getCustomer() {
     $shipmentId = Mage::getModel('sales/order_shipment')
       ->loadByIncrementId($shipment->getIncrementId())
       ->getId();
-    
+
     return Mage::helper('adminhtml')
       ->getUrl(
         'adminhtml/sales_shipment/view',
@@ -234,4 +239,4 @@ private function getCustomer() {
         array('invoice_id' => $invoice->getId(), '_type' => Mage_Core_Model_Store::URL_TYPE_WEB)
       );
   }
-} 
+}

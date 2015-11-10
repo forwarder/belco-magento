@@ -127,6 +127,10 @@ class Belco_Widget_Model_Api
 
     $response = curl_exec($ch);
 
+    if (curl_errno($ch)) {
+      $this->logger->log("Curl error: " . curl_error($ch));
+    }
+
     if ($response === false) {
       curl_close($ch);
       throw new Exception("Error: 'Request to Belco failed'");

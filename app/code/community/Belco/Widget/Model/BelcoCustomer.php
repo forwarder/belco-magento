@@ -34,9 +34,13 @@ class Belco_Widget_Model_BelcoCustomer {
       'orders' => $lifetime->getNumOrders(),
       'totalSpent' => $lifetime->getLifetime()
     );
-  
+
+    if ($lastOrder = $this->getLastOrder()) {
+      $belcoCustomer['lastOrder'] = strtotime($lastOrder->getCreatedAt());
+    }
+
     $address = $this->customer->getDefaultBillingAddress();
-  
+
     if (!empty($address)) {
       $belcoCustomer = array_merge($belcoCustomer, array(
         'phoneNumber' => $address->getTelephone(),
@@ -48,16 +52,25 @@ class Belco_Widget_Model_BelcoCustomer {
     return $belcoCustomer;
   }
 
+  function getLastOrder() {
+    return Mage::getResourceModel('sales/order_collection')
+      ->addFieldToSelect('created_at')
+      ->addFieldToSelect('customer_id')
+      ->addFieldToFilter('customer_id', $this->customer->getId())
+      ->addAttributeToSort('created_at', 'DESC')
+      ->getFirstItem();
+  }
+
   /**
    * Gets customer statics like total order count and total spend.
    *
    * @return array
    */
-  function getLifeTimeSalesCustomer(){
+  function getLifeTimeSalesCustomer() {
     return Mage::getResourceModel('sales/sale_collection')
       ->setOrderStateFilter(null)
       ->setCustomerFilter($this->customer)
       ->load()
       ->getTotals();
   }
-} 
+}

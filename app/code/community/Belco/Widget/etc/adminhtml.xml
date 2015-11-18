@@ -1,19 +1,22 @@
-<acl>
-  <resources>
-    <admin>
-      <children>
-        <system>
-          <children>
-            <config>
-              <children>
-                <belco_settings translate="title" module="belco">
-                  <title>Settings</title>
-                </belco_settings>
-              </children>
-            </config>
-          </children>
-        </system>
-      </children>
-    </admin>
-  </resources>
-</acl>
+<?xml version="1.0"?>
+<config>
+  <acl>
+    <resources>
+      <admin>
+        <children>
+          <system>
+            <children>
+              <config>
+                <children>
+                  <belco_settings module="belco" translate="title">
+                    <title>Belco Settings</title>
+                  </belco_settings>
+                </children>
+              </config>
+            </children>
+          </system>
+        </children>
+      </admin>
+    </resources>
+  </acl>
+</config>

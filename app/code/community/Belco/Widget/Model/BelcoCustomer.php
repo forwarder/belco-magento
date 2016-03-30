@@ -36,7 +36,9 @@ class Belco_Widget_Model_BelcoCustomer {
     );
 
     if ($lastOrder = $this->getLastOrder()) {
-      $belcoCustomer['lastOrder'] = strtotime($lastOrder->getCreatedAt());
+      if ($lastOrderDate = strtotime($lastOrder->getCreatedAt())) {
+        $belcoCustomer['lastOrder'] = $lastOrderDate;
+      }
     }
 
     $address = $this->customer->getDefaultBillingAddress();

@@ -37,7 +37,7 @@ class Belco_Widget_Model_Api
     $data = array(
       'id' => $config['shop_id'],
       'type' => 'magento',
-      'url' => Mage::helper('core/url')->getHomeUrl()
+      'url' => Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB)
     );
     return $this->post('shops/connect', $data);
   }

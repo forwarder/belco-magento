@@ -145,7 +145,7 @@ class Belco_Widget_Model_BelcoOrder
    */
   private function getInvoices()
   {
-  $invoices = array();
+    $invoices = array();
     if ($this->order->hasInvoices()) {
       foreach ($this->order->getInvoiceCollection() as $invoice) {
         $invoices[] = array(

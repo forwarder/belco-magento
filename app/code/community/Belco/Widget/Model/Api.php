@@ -61,7 +61,8 @@ class Belco_Widget_Model_Api
    */
   public function syncOrder($order)
   {
-    return $this->post('sync/order', $this->toBelcoOrder($order));
+    $order = $this->toBelcoOrder($order);
+    return $this->post('sync/customer', $order['customer']);
   }
 
   /**

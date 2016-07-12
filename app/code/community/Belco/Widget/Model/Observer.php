@@ -71,13 +71,10 @@ class Belco_Widget_Model_Observer
     $status = $order->getStatus();
     $this->helper->log($status);
     if(is_string($status)){ //only fire when we actually have an status
-      $string = "The status of order #" . $order->getIncrementId() . " chanced to: " . $order->getStatus();
+      $string = "The status of order #" . $order->getIncrementId() . " changed to: " . $order->getStatus();
       $this->helper->log($string);
       try{
         $this->api->syncOrder($order);
-        $this->helper->log("Order has changed, sending updated customer info to Belco");
-        $customer = Mage::getModel('customer/customer')->load($order->getCustomerId());
-        $this->_customerHook($customer);
       }
       catch(Exception $e){
         $this->helper->log("Exception: ". $e->getMessage());
@@ -85,9 +82,9 @@ class Belco_Widget_Model_Observer
       }
     }
   }
-  
+
 public function systemConfigChangedHook(Varien_Event_Observer $observer)
-  {  
+  {
     try {
       $this->helper->connectShop();
     } catch (Exception $e) {

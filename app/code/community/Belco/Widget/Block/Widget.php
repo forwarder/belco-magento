@@ -7,7 +7,7 @@ class Belco_Widget_Block_Widget extends Mage_Core_Block_Template {
   }
 
   public function getConfig() {
-    $settings = Mage::getStoreConfig('belco_settings/general');
+    $settings = Mage::getStoreConfig('belco_settings/general', Mage::app()->getStore());
     $secret = $settings['api_secret'];
     $session = Mage::getSingleton('customer/session');
 

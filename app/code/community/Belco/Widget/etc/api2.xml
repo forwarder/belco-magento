@@ -61,6 +61,7 @@
                     <base_currency_code>Base Currency</base_currency_code>
                     <store_currency_code>Order Currency</store_currency_code>
                     <store_name>Store Name</store_name>
+                    <store_id>Store Id</store_id>
                     <remote_ip>Placed from IP</remote_ip>
                     <store_to_order_rate>Store Currency to Order Currency Rate</store_to_order_rate>
                     <subtotal>Subtotal</subtotal>

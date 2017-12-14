@@ -115,6 +115,8 @@ class Belco_Widget_Model_Api
     $this->logger->log("Data: " . $data);
 
     $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 2);            // Connect within 2 seconds
+    curl_setopt($ch, CURLOPT_TIMEOUT, 5);                   // API should reply within 5 seconds
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_HTTPHEADER, array(

@@ -105,9 +105,7 @@ class Belco_Widget_Model_Api
     $data = json_encode($data);
 
     if (empty($config['api_secret'])) {
-      throw new Exception(
-        'Missing API configuration, go to System -> Configuration -> Belco.io -> Settings and fill in your API credentials'
-      );
+      return false;
     }
 
     $url = $config['api_url'] . $path;
@@ -131,12 +129,12 @@ class Belco_Widget_Model_Api
     $response = curl_exec($ch);
 
     if (curl_errno($ch)) {
-      $this->logger->log("Curl error: " . curl_error($ch));
+      $this->logger->log("Belco Curl error: " . curl_error($ch));
     }
 
     if ($response === false) {
       curl_close($ch);
-      throw new Exception("Error: 'Request to Belco failed'");
+      return false;
     }
 
     $response = json_decode($response);
@@ -146,7 +144,8 @@ class Belco_Widget_Model_Api
     curl_close($ch);
 
     if (in_array($responseInfo['http_code'], $errorCodes)) {
-      throw new Exception("Error: '" . $response->message . "'");
+      $this->logger->log("Belco Api error: " . $response->message);
+      return false;
     }
 
     return $response;

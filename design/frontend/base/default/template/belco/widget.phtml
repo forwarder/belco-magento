@@ -1,7 +1,7 @@
 <?php
 $config = $this->getConfig();
 
-if (isset($config['shopId'])) :
+if (!empty($config['shopId'])) :
 ?>
 <script>
 window.belcoConfig = <?php echo json_encode($config); ?>;

@@ -51,9 +51,8 @@ class Belco_Widget_Model_Observer
       try{
         $this->api->syncOrder($order);
       }
-      catch(Exception $e){
-        $this->helper->log("Exception: ". $e->getMessage());
-        $this->helper->warnAdmin($e->getMessage());
+      catch(Exception $e) {
+        $this->helper->log("Belco Exception: ". $e->getMessage());
       }
     }
   }
@@ -76,9 +75,8 @@ class Belco_Widget_Model_Observer
       try{
         $this->api->syncOrder($order);
       }
-      catch(Exception $e){
-        $this->helper->log("Exception: ". $e->getMessage());
-        $this->helper->warnAdmin($e->getMessage());
+      catch(Exception $e) {
+        $this->helper->log("Belco Exception: ". $e->getMessage());
       }
     }
   }
@@ -88,7 +86,7 @@ public function systemConfigChangedHook(Varien_Event_Observer $observer)
     try {
       $this->helper->connectShop();
     } catch (Exception $e) {
-      $this->helper->log("Exception: " . $e->getMessage());
+      $this->helper->log("Belco Exception: " . $e->getMessage());
       $this->helper->warnAdmin($e->getMessage());
     }
   }
@@ -103,8 +101,7 @@ public function systemConfigChangedHook(Varien_Event_Observer $observer)
       try {
         $this->api->syncCustomer($customer);
       } catch (Exception $e) {
-        $this->helper->log("Exception: " . $e->getMessage());
-        $this->helper->warnAdmin($e->getMessage());
+        $this->helper->log("Belco Exception: " . $e->getMessage());
       }
     }
   }

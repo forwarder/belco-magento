@@ -31,10 +31,32 @@ class Belco_Widget_Model_Observer
    *
    * @param Varien_Event_Observer $observer
    */
-  public function customerHook(Varien_Event_Observer $observer)
+  public function customerSaveHook(Varien_Event_Observer $observer)
   {
     $customer = $observer->getEvent()->getCustomer();
     $this->_customerHook($customer);
+  }
+
+  /**
+   * Fires when the customer_delete_after_handler events is dispatched.
+   * This happens when a customer is created and when an customer places an order.
+   * Also fires when a customer is created/edited through the backend.
+   *
+   * @param Varien_Event_Observer $observer
+   */
+  public function customerDeleteHook(Varien_Event_Observer $observer)
+  {
+    try {
+      $customer = $observer->getEvent()->getCustomer();
+
+      if ($customer) {
+        $this->helper->log("Customer deleted: " . $customer->getId());
+
+        $this->api->deleteCustomer($customer->getId());
+      }
+    } catch(Exception $e) {
+      $this->helper->log("Belco Exception: ". $e->getMessage());
+    }
   }
 
   /**

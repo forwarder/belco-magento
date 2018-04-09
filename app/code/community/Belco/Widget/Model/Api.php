@@ -54,6 +54,17 @@ class Belco_Widget_Model_Api
   }
 
   /**
+   * Delete a customer in Belco
+   *
+   * @param $id
+   * @return mixed
+   */
+  public function deleteCustomer($id)
+  {
+    return $this->post('sync/customer/delete', array('id' => $id));
+  }
+
+  /**
    * Synchronizes order data to Belco
    *
    * @param $order

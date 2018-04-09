@@ -2,7 +2,7 @@
 <config>
   <modules>
     <Belco_Widget>
-      <version>0.3.3</version>
+      <version>0.4.0</version>
     </Belco_Widget>
   </modules>
   <global>
@@ -28,11 +28,21 @@
           <customer_save_after_handler>
             <type>singleton</type>
             <class>belco/observer</class>
-            <method>customerHook</method>
+            <method>customerSaveHook</method>
             <args/>
           </customer_save_after_handler>
         </observers>
       </customer_save_after>
+      <customer_delete_after>
+        <observers>
+          <customer_delete_after_handler>
+            <type>singleton</type>
+            <class>belco/observer</class>
+            <method>customerDeleteHook</method>
+            <args/>
+          </customer_delete_after_handler>
+        </observers>
+      </customer_delete_after>
       <sales_order_place_after>
         <observers>
           <sales_order_place_after_handler>

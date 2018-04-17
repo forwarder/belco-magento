@@ -9,7 +9,7 @@ __You will need your Belco Shop ID and API secret to complete the setup, which y
 
 ### Installation
 
-- Download the [belco-0.4.0.tgz](https://github.com/forwarder/belco-magento/raw/master/package/belco-0.4.0.tgz).
+- Download the [belco-0.4.1.tgz](https://github.com/forwarder/belco-magento/raw/master/package/belco-0.4.1.tgz).
 or clone the git repo, `git clone git@github.com:forwarder/belco-magento.git`. The package file is located in the `package` folder.
 - Log in to your Magento backend.
 - Go to `System > Tools > Backups` and create a `System Backup`.
@@ -17,7 +17,7 @@ or clone the git repo, `git clone git@github.com:forwarder/belco-magento.git`. T
 - Go to `System -> Cache Management` and enable Configuration.
 
 - Go to `System > Magento Connect > Magento Connect Manager` and log in with your admin credentials.
-- Under `Direct package file upload` click `Choose file`, find and select the file `belco-0.4.0.tgz`
+- Under `Direct package file upload` click `Choose file`, find and select the file `belco-0.4.1.tgz`
 - Click `Upload` to start the installation process.
 - After the installation is completed go back to the admin page.
 

@@ -9,7 +9,7 @@ __You will need your Belco Shop ID and API secret to complete the setup, which y
 
 ### Installation
 
-#### Package
+#### Option 1. Package
 
 - Download the [latest release](https://github.com/forwarder/belco-magento/releases).
 - Log in to your Magento backend.
@@ -22,7 +22,7 @@ __You will need your Belco Shop ID and API secret to complete the setup, which y
 - Click `Upload` to start the installation process.
 - After the installation is completed go back to the admin page.
 
-#### Composer
+#### Option 2. Composer
 
 ```bash
 composer require forwarder/belco-magento

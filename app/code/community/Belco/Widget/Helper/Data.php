@@ -43,7 +43,7 @@ class Belco_Widget_Helper_Data extends Mage_Core_Helper_Abstract
 
     $this->api->syncCustomers($collection);
   }
-    
+
   public function connectShop()
   {
     $result = $this->api->connect();
@@ -78,5 +78,27 @@ class Belco_Widget_Helper_Data extends Mage_Core_Helper_Abstract
   public static function formatPrice($price){
     return Mage::helper('core')->currency($price, true, false);
   }
+
+  public function addEvent($method, $type, $data, $metaData = false)
+    {
+        $events = array();
+        if ($this->getSession()->getData(Belco_Widget_Block::DATA_TAG) != '') {
+            $events = (array)$this->getSession()->getData(Belco_Widget_Block::DATA_TAG);
+        }
+        $eventToAdd = array(
+            'method' => $method,
+            'type' => $type,
+            'data' => $data
+        );
+        if ($metaData) {
+            $eventToAdd['metaData'] = $metaData;
+        }
+        if ($method == 'identify') {
+            array_unshift($events, $eventToAdd);
+        } else {
+            array_push($events, $eventToAdd);
+        }
+        $this->getSession()->setData(Belco_Widget_Block::DATA_TAG, $events);
+    }
+
 }
-   

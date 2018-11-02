@@ -2,6 +2,8 @@
 
 class Belco_Widget_Block_Widget extends Mage_Core_Block_Template {
 
+  const DATA_TAG = "belco_events";
+
   public function __construct() {
     $this->belcoCustomer = Mage::getModel('belco/belcoCustomer');
   }
@@ -16,12 +18,20 @@ class Belco_Widget_Block_Widget extends Mage_Core_Block_Template {
     );
 
     if ($session->isLoggedIn()) {
-      $customer = Mage::getModel('customer/customer')->load($session->getCustomer()->getId());
+      $customer = Mage::getModel('customer/customer')->load($session->getCustomer()->getId(), $secret);
 
       if ($secret) {
         $config['hash'] = hash_hmac("sha256", $customer->getId(), $secret);
       }
       $config = array_merge($config, $this->belcoCustomer->factory($customer));
+    } else {
+      $events = $this->getEvents();
+      $config['hash'] = hash_hmac('sha256', $customer['email'], $secret);
+      $identify = array_shift($events);
+
+      if ($identify) {
+      $config = array_merge($config, $identify);
+      }
     }
 
     if ($cart = $this->getCart()) {
@@ -29,6 +39,14 @@ class Belco_Widget_Block_Widget extends Mage_Core_Block_Template {
     }
 
     return $config;
+  }
+
+  public function getEvents() {
+          $events = (array)Mage::getSingleton('core/session')->getData(self::DATA_TAG);
+          // clear events from session ater get events once
+          Mage::getSingleton('core/session')->setData(self::DATA_TAG,'');
+          return array_filter($events);
+          print_r($events);
   }
 
   protected function getCart() {

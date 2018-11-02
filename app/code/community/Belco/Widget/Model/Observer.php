@@ -1,6 +1,4 @@
 <?php
-
-
 /**
  * Class Belco_Widget_Model_Observer
  */
@@ -16,6 +14,7 @@ class Belco_Widget_Model_Observer
    * @var Belco_Widget_Helper_Data
    */
   private $helper;
+
   /**
    * Gets and sets the dependency's
    */
@@ -67,11 +66,22 @@ class Belco_Widget_Model_Observer
    */
   public function orderPlacedHook(Varien_Event_Observer $observer)
   {
-    $order = $observer->getEvent()->getOrder();
     if($order){
       $this->helper->log("New order placed with id: " . $order->getId());
       try{
-        $this->api->syncOrder($order);
+        $order = $observer->getEvent()->getOrder();
+        if ($order->getId()) {
+          $data = $this->helper->toBelcoOrder($order);
+        }
+        $data = array();
+        $order = $observer->getEvent()->getOrder();
+        if ($order->getId()) {
+            $data = $helper->toBelcoOrder($order);
+            if($order->getCustomerIsGuest()) {
+                $helper->addEvent('identify', 'identify', $data['customer']);
+              }
+            $helper->addEvent('track', 'order', $data);
+          }
       }
       catch(Exception $e) {
         $this->helper->log("Belco Exception: ". $e->getMessage());

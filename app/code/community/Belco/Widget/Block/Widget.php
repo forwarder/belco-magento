@@ -24,13 +24,15 @@ class Belco_Widget_Block_Widget extends Mage_Core_Block_Template {
         $config['hash'] = hash_hmac("sha256", $customer->getId(), $secret);
       }
       $config = array_merge($config, $this->belcoCustomer->factory($customer));
-    } else {
+      } else {
       $events = $this->getEvents();
-      $config['hash'] = hash_hmac('sha256', $customer['email'], $secret);
       $identify = array_shift($events);
 
-      if ($identify) {
-      $config = array_merge($config, $identify);
+      if ($identify && $identify['type'] == 'identify') {
+        if ($secret) {
+        $config['hash'] = hash_hmac('sha256', $identify['data']['email'], $secret);
+        }
+        $config = array_merge($config, $identify['data']);
       }
     }
 
@@ -46,7 +48,6 @@ class Belco_Widget_Block_Widget extends Mage_Core_Block_Template {
           // clear events from session ater get events once
           Mage::getSingleton('core/session')->setData(self::DATA_TAG,'');
           return array_filter($events);
-          print_r($events);
   }
 
   protected function getCart() {

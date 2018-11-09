@@ -67,6 +67,10 @@ class Belco_Widget_Helper_Data extends Mage_Core_Helper_Abstract
     return $this->logger;
   }
 
+  public function getSession(){
+    return Mage::getSingleton('core/session');
+  }
+
   public static function warnAdmin($warning){
     Mage::getSingleton('adminhtml/session')->addWarning("Belco: " . $warning);
   }
@@ -82,8 +86,8 @@ class Belco_Widget_Helper_Data extends Mage_Core_Helper_Abstract
   public function addEvent($method, $type, $data, $metaData = false)
     {
         $events = array();
-        if ($this->getSession()->getData(Belco_Widget_Block::DATA_TAG) != '') {
-            $events = (array)$this->getSession()->getData(Belco_Widget_Block::DATA_TAG);
+        if ($this->getSession()->getData(Belco_Widget_Block_Widget::DATA_TAG) != '') {
+            $events = (array)$this->getSession()->getData(Belco_Widget_Block_Widget::DATA_TAG);
         }
         $eventToAdd = array(
             'method' => $method,
@@ -98,7 +102,7 @@ class Belco_Widget_Helper_Data extends Mage_Core_Helper_Abstract
         } else {
             array_push($events, $eventToAdd);
         }
-        $this->getSession()->setData(Belco_Widget_Block::DATA_TAG, $events);
+        $this->getSession()->setData(Belco_Widget_Block_Widget::DATA_TAG, $events);
     }
 
 }

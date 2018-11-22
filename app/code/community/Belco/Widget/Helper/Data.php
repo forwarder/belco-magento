@@ -67,6 +67,10 @@ class Belco_Widget_Helper_Data extends Mage_Core_Helper_Abstract
     return $this->logger;
   }
 
+  public function getSession(){
+    return Mage::getSingleton('core/session');
+  }
+
   public static function warnAdmin($warning){
     Mage::getSingleton('adminhtml/session')->addWarning("Belco: " . $warning);
   }

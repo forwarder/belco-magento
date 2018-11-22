@@ -83,7 +83,7 @@ class Belco_Widget_Model_Api
    * @param Mage_Customer_Model_Customer $customer
    * @return array
    */
-  private function toBelcoCustomer(Mage_Customer_Model_Customer $customer)
+  public function toBelcoCustomer(Mage_Customer_Model_Customer $customer)
   {
     return $this->belcoCustomer->factory($customer);
   }
@@ -96,7 +96,7 @@ class Belco_Widget_Model_Api
    * @param Mage_Sales_Model_Order $order
    * @return array
    */
-  private function toBelcoOrder(Mage_Sales_Model_Order $order)
+  public function toBelcoOrder(Mage_Sales_Model_Order $order)
   {
     return $this->belcoOrder->factory($order);
   }

@@ -24,13 +24,16 @@ class Belco_Widget_Block_Widget extends Mage_Core_Block_Template {
         $config['hash'] = hash_hmac("sha256", $customer->getId(), $secret);
       }
       $config = array_merge($config, $this->belcoCustomer->factory($customer));
-    } else {
+      } else {
       $events = $this->getEvents();
       $config['hash'] = hash_hmac('sha256', $customer['email'], $secret);
       $event = array_shift($events);
 
       if ($event && $event['method'] === 'identify') {
-        $config = array_merge($config, $event);
+        if ($secret) {
+          $config['hash'] = hash_hmac('sha256', $event['data']['email'], $secret);
+        }
+        $config = array_merge($config, $event['data']);
       }
     }
 

@@ -32,8 +32,16 @@ class Belco_Widget_Model_Observer
    */
   public function customerSaveHook(Varien_Event_Observer $observer)
   {
-    $customer = $observer->getEvent()->getCustomer();
-    $this->_customerHook($customer);
+    try {
+      $customer = $observer->getEvent()->getCustomer();
+      if ($customer) {
+        $this->helper->log("user with id: " . $customer->getId() . " chanced");
+
+        $this->api->syncCustomer($customer);
+      }
+    } catch (Exception $e) {
+      $this->helper->log("Belco Exception: " . $e->getMessage());
+    }
   }
 
   /**
@@ -53,7 +61,7 @@ class Belco_Widget_Model_Observer
 
         $this->api->deleteCustomer($customer->getId());
       }
-    } catch(Exception $e) {
+    } catch (Exception $e) {
       $this->helper->log("Belco Exception: ". $e->getMessage());
     }
   }
@@ -66,26 +74,20 @@ class Belco_Widget_Model_Observer
    */
   public function orderPlacedHook(Varien_Event_Observer $observer)
   {
-    if($order){
+    try {
+      $order = $observer->getEvent()->getOrder();
+
       $this->helper->log("New order placed with id: " . $order->getId());
-      try{
-        $order = $observer->getEvent()->getOrder();
-        if ($order->getId()) {
-          $data = $this->helper->toBelcoOrder($order);
+
+      if ($order->getId()) {
+        $data = $this->helper->toBelcoOrder($order);
+        if ($order->getCustomerIsGuest()) {
+          $this->helper->addEvent('identify', 'identify', $data['customer']);
         }
-        $data = array();
-        $order = $observer->getEvent()->getOrder();
-        if ($order->getId()) {
-            $data = $helper->toBelcoOrder($order);
-            if($order->getCustomerIsGuest()) {
-                $helper->addEvent('identify', 'identify', $data['customer']);
-              }
-            $helper->addEvent('track', 'order', $data);
-          }
+        $this->helper->addEvent('track', 'order', $data);
       }
-      catch(Exception $e) {
-        $this->helper->log("Belco Exception: ". $e->getMessage());
-      }
+    } catch (Exception $e) {
+      $this->helper->log("Belco Exception: ". $e->getMessage());
     }
   }
 
@@ -101,40 +103,24 @@ class Belco_Widget_Model_Observer
     $order = $observer->getEvent()->getOrder();
     $status = $order->getStatus();
     $this->helper->log($status);
-    if(is_string($status)){ //only fire when we actually have an status
+    if (is_string($status)){ //only fire when we actually have an status
       $string = "The status of order #" . $order->getIncrementId() . " changed to: " . $order->getStatus();
       $this->helper->log($string);
-      try{
+      try {
         $this->api->syncOrder($order);
-      }
-      catch(Exception $e) {
+      } catch(Exception $e) {
         $this->helper->log("Belco Exception: ". $e->getMessage());
       }
     }
   }
 
-public function systemConfigChangedHook(Varien_Event_Observer $observer)
+  public function systemConfigChangedHook(Varien_Event_Observer $observer)
   {
     try {
       $this->helper->connectShop();
     } catch (Exception $e) {
       $this->helper->log("Belco Exception: " . $e->getMessage());
       $this->helper->warnAdmin($e->getMessage());
-    }
-  }
-
-  /**
-   * @param Mage_Customer_Model_Customer $customer
-   */
-  private function _customerHook(Mage_Customer_Model_Customer $customer)
-  {
-    if ($customer) {
-      $this->helper->log("user with id: " . $customer->getId() . " chanced");
-      try {
-        $this->api->syncCustomer($customer);
-      } catch (Exception $e) {
-        $this->helper->log("Belco Exception: " . $e->getMessage());
-      }
     }
   }
 

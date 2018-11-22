@@ -80,7 +80,7 @@ class Belco_Widget_Model_Observer
       $this->helper->log("New order placed with id: " . $order->getId());
 
       if ($order->getId()) {
-        $data = $this->helper->toBelcoOrder($order);
+        $data = $this->api->toBelcoOrder($order);
         if ($order->getCustomerIsGuest()) {
           $this->helper->addEvent('identify', 'identify', $data['customer']);
         }

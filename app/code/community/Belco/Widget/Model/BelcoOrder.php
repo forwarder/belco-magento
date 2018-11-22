@@ -90,7 +90,7 @@ class Belco_Widget_Model_BelcoOrder
       'lastVisit' => time(),
       'ipAddress' => $this->order->getRemoteIp()
     );
-    return $customer;
+    return array_filter($customer);
   }
 
   /**

@@ -6,6 +6,8 @@
 class Belco_Widget_Helper_Data extends Mage_Core_Helper_Abstract
 {
 
+  const DATA_TAG = "belco_events";
+
   /**
    * @var Belco_Widget_Model_Api
    */
@@ -86,8 +88,8 @@ class Belco_Widget_Helper_Data extends Mage_Core_Helper_Abstract
   public function addEvent($method, $type, $data, $metaData = false)
   {
     $events = array();
-    if ($this->getSession()->getData(Belco_Widget_Block::DATA_TAG) != '') {
-      $events = (array)$this->getSession()->getData(Belco_Widget_Block::DATA_TAG);
+    if ($this->getSession()->getData(self::DATA_TAG) != '') {
+      $events = (array)$this->getSession()->getData(self::DATA_TAG);
     }
     $eventToAdd = array(
       'method' => $method,
@@ -102,7 +104,15 @@ class Belco_Widget_Helper_Data extends Mage_Core_Helper_Abstract
     } else {
       array_push($events, $eventToAdd);
     }
-    $this->getSession()->setData(Belco_Widget_Block::DATA_TAG, $events);
+    $this->getSession()->setData(self::DATA_TAG, $events);
+  }
+
+  public function getEvents() {
+    $events = (array)Mage::getSingleton('core/session')->getData(self::DATA_TAG);
+
+    Mage::getSingleton('core/session')->setData(self::DATA_TAG, '');
+
+    return array_filter($events);
   }
 
 }

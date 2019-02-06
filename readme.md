@@ -11,7 +11,7 @@ __You will need your Belco Shop ID and API secret to complete the setup, which y
 
 #### Option 1. Package
 
-- Download the [latest release](https://github.com/forwarder/belco-magento/releases).
+- Download the [latest release](https://github.com/forwarder/belco-magento/releases/latest).
 - Log in to your Magento backend.
 - Go to `System > Tools > Backups` and create a `System Backup`.
 - Go to `System > Tools > Compilation` and disable compilation if it's enabled.

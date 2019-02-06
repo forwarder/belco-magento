@@ -11,9 +11,6 @@ class Belco_Widget_Model_Logger {
    */
   public static function log($string){
     Mage::log($string, null, "Belco_Widget.log");
-    if(defined('STDIN') ){
-        print "Magento [Belco]: " . $string . "\n";
-    }
   }
 
   /**

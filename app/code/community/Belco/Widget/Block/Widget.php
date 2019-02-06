@@ -2,8 +2,6 @@
 
 class Belco_Widget_Block_Widget extends Mage_Core_Block_Template {
 
-  
-
   public function __construct() {
     $this->belcoCustomer = Mage::getModel('belco/belcoCustomer');
     $this->helper = Mage::helper("belco");
@@ -45,8 +43,6 @@ class Belco_Widget_Block_Widget extends Mage_Core_Block_Template {
 
     return $config;
   }
-
-
 
   protected function getCart() {
     $cart = Mage::helper('checkout/cart')->getCart();

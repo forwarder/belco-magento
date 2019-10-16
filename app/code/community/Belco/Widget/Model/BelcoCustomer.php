@@ -49,6 +49,14 @@ class Belco_Widget_Model_BelcoCustomer {
         'country' => $address->getCountry(),
         'city' => $address->getCity()
       ));
+
+      if (!empty($address->getCompany())) {
+        $belcoCustomer['company'] = array(
+          'id' => $this->customer->getId(),
+          'name' => $address->getCompany(),
+          'signedUp' => strtotime($this->customer->getCreatedAt())
+        );
+      }
     }
 
     return $belcoCustomer;

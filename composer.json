@@ -2,7 +2,7 @@
    "name": "forwarder/belco-magento",
     "license": "GPL-3.0",
     "type": "magento-module",
-    "version": "0.7.0-BETA",
+    "version": "0.7.1-BETA",
     "description":"Belco.io Magento Module to install widget code and sync customer information.",
     "require": {
     },

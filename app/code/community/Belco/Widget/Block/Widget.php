@@ -17,7 +17,7 @@ class Belco_Widget_Block_Widget extends Mage_Core_Block_Template {
     );
 
     if ($session->isLoggedIn()) {
-      $customer = Mage::getModel('customer/customer')->load($session->getCustomer()->getId(), $secret);
+      $customer = Mage::getModel('customer/customer')->load($session->getCustomer()->getId());
 
       if ($secret) {
         $config['hash'] = hash_hmac("sha256", $customer->getId(), $secret);

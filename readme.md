@@ -9,20 +9,9 @@ __You will need your Belco Shop ID and API secret to complete the setup, which y
 
 ### Installation
 
-#### Option 1. Package
+#### Composer
 
-- Download the [latest release](https://github.com/forwarder/belco-magento/releases/latest).
-- Log in to your Magento backend.
-- Go to `System > Tools > Backups` and create a `System Backup`.
-- Go to `System > Tools > Compilation` and disable compilation if it's enabled.
-- Go to `System -> Cache Management` and enable Configuration.
-
-- Go to `System > Magento Connect > Magento Connect Manager` and log in with your admin credentials.
-- Under `Direct package file upload` click `Choose file`, find and select the file you just downloaded (`belco-0.x.x.tgz`)
-- Click `Upload` to start the installation process.
-- After the installation is completed go back to the admin page.
-
-#### Option 2. Composer
+Composer is the prefered way to install our plugin.
 
 ```bash
 composer require forwarder/belco-magento
@@ -42,6 +31,10 @@ or add this to your composer.json file manually
         }
     ]
 ```
+
+#### Modman
+
+You can also use modman to install the plugin.
 
 ### Configuration
 
